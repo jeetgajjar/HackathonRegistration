@@ -38,16 +38,16 @@ for x in range(2):
 # create_unique_qr("test", "ma", "email@email.com", "minor", "Large", "school", "undergrad", "from Python", "L", "15")
 
 # "id": 61325,
-#             "email": "rognessrc@vcu.edu",
-#             "first_name": "Colby",
-#             "last_name": "Rogness",
+#             "email": "@vcu.edu",
+#             "first_name": "",
+#             "last_name": "",
 #             "major": "Computer Science",
 #             "shirt_size": "Unisex - L",
 #             "dietary_restrictions": "None",
 #             "special_needs": "n/a",
 #             "date_of_birth": "1996-02-23",
 #             "gender": "Male",
-#             "phone_number": "+18042634163",
+#             "phone_number": "+",
 #             "level_of_study": "University (Undergraduate)",
 #             "school": {
 #                 "id": 2282,
