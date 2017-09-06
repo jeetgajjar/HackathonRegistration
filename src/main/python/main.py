@@ -12,6 +12,7 @@ current_participants = resp['pagination']['results_on_page']
 print(current_participants)
 print(resp['data'][0]['school']['name'])
 
+
 def create_unique_qr(f_name, l_name, email, major, shirt_size, school_name, level_of_study, secret, error, scale):
     auto_fill_url = ('https://docs.google.com/forms/d/e/1FAIpQLScDAjNoosnfIE_gJ4DeNumMW1edxIeVLcW-zEJufyq2-roSSA/'
                      'viewform?usp=pp_url&entry.1937819802={0}&entry.347848875={1}&entry.35909750={2}&entry.68492964={3}'
