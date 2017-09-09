@@ -1,8 +1,11 @@
 import pyqrcode
 import requests
+import urllib.parse
 
 client_id = '011ae17fa0204c3d28cd46f3dba0ff654a0a847ba572d37cb6362089502cbed3'
-secret_id = ''
+with open('secret') as f:
+    secret_id = f.readline()
+
 per_page = 1000
 url = ('https://my.mlh.io/api/v2/users?client_id={0}&secret={1}&per_page={2}'.format(client_id, secret_id, per_page))
 u = requests.get(url)
@@ -20,7 +23,9 @@ def create_unique_qr(f_name, l_name, email, major, shirt_size, school_name, leve
                      '&entry.1024666618={7}'.format(
         f_name, l_name, email, major, shirt_size, school_name, level_of_study, secret))
     name = l_name + "-" + f_name
-    qr = pyqrcode.create(auto_fill_url.encode('utf-8'))
+    print(auto_fill_url)
+    query = urllib.parse.quote(auto_fill_url)
+    qr = pyqrcode.create(query)
     qr.png(name + ".png")
 
 for x in range(2):
@@ -29,28 +34,16 @@ for x in range(2):
     l_name = str(resp['data'][x]['last_name'])
     email = str(resp['data'][x]['email'])
     major = str(resp['data'][x]['major'])
+    if "" in major:
+       nm = major.replace(" ", "+")
     shirt_size = str(resp['data'][x]['shirt_size'])
+    if " " in shirt_size:
+        nss = shirt_size.replace(" ", "+")
     level_of_study = str(resp['data'][x]['level_of_study'])
+    if " " in level_of_study:
+        nlos = level_of_study.replace(" ", "+").replace("(", "+").replace(")", "+")
     school_name = str(resp['data'][x]['school']['name'])
-    create_unique_qr(f_name, l_name, email, major, shirt_size, school_name, level_of_study, secret="RamHacks2017!",
+    if " " in school_name:
+        nsn = school_name.replace(" ", "+")
+    create_unique_qr(f_name, l_name, email, nm, nss, nsn, nlos, secret="RamHacks2017",
                      error="L", scale="10")
-
-
-# create_unique_qr("test", "ma", "email@email.com", "minor", "Large", "school", "undergrad", "from Python", "L", "15")
-
-# "id": 61325,
-#             "email": "@vcu.edu",
-#             "first_name": "",
-#             "last_name": "",
-#             "major": "Computer Science",
-#             "shirt_size": "Unisex - L",
-#             "dietary_restrictions": "None",
-#             "special_needs": "n/a",
-#             "date_of_birth": "1996-02-23",
-#             "gender": "Male",
-#             "phone_number": "+",
-#             "level_of_study": "University (Undergraduate)",
-#             "school": {
-#                 "id": 2282,
-#                 "name": "Virginia Commonwealth University"
-
